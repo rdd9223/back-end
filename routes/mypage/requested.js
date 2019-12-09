@@ -75,6 +75,7 @@ router.get('/', authUtils.isLoggedin, async(req, res) => {
 		
 		buf.requested_item_title = getRequestedItemResult[0].title;
 		buf.requested_item_thumbnail = getRequestedItemResult[0].thumbnail;
+		buf.requested_item_idx = myTrade[i].to_item_idx;
 		
 		//거래 요청 시간 추가
 		buf.date = myTrade[i].date;

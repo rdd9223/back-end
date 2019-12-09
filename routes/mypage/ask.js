@@ -64,7 +64,7 @@ router.get('/', authUtils.isLoggedin, async(req, res)=>{
 		}
 		//내가 교환 신청을 한 내 물품 인덱스의 정보를 저장한다.
 		
-		const getMyItemQuery = "SELECT item_idx, thumbnail, title, writer_idx FROM item WHERE item_idx = ?";
+		const getMyItemQuery = "SELECT thumbnail, title, writer_idx FROM item WHERE item_idx = ?";
 		const getMyItemResult = await db.queryParam_Parse(getMyItemQuery, [getMyTradeResult[i].from_item_idx]);
 		if(!getMyItemResult[0]){
 			res.status(200).send(utils.successTrue(statusCode.OK, resMessage.NULL_VALUE));
@@ -74,7 +74,7 @@ router.get('/', authUtils.isLoggedin, async(req, res)=>{
 		for(let k = 0; k < getMyItemResult.length; k++){
 			buf[i].ask_item_thumbnail = getMyItemResult[k].thumbnail;
 			buf[i].ask_item_title = getMyItemResult[k].title;
-			buf[i].ask_item_idx = getMyItemResult[k].item_idx;
+			buf[i].ask_item_idx = getMyTradeResult[i].from_item_idx;
 		}
 	}
 	
